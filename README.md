@@ -9,8 +9,8 @@
 
 A live COVID 19 visualiser made with Python streamlit, pandas, plotly, etc. via consuming data from the Coronavirus COVID 19 API, and hosted with the help of heroku. The tracker has the following features:
 
-    * A global heatmap to view the COVID 19 intensity.
-    * Comparing the change in the virus between two countries.
-    * Line graphs to visualise and compare the COVID data between two countries.
-    * Live display of the number of cases in various countires.
-    * Filter based search depending upon various countries   
+     A global heatmap to view the COVID 19 intensity.
+     Comparing the change in the virus between two countries.
+     Line graphs to visualise and compare the COVID data between two countries.
+     Live display of the number of cases in various countires.
+     Filter based search depending upon various countries   
