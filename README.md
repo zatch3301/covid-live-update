@@ -8,6 +8,7 @@
 [![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 A live COVID 19 visualiser made with Python streamlit, pandas, plotly, etc. via consuming data from the Coronavirus COVID 19 API, and hosted with the help of heroku. The tracker has the following features:
+
     * A global heatmap to view the COVID 19 intensity.
     * Comparing the change in the virus between two countries.
     * Line graphs to visualise and compare the COVID data between two countries.
