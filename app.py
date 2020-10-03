@@ -61,35 +61,38 @@ if country != 'Select a Country':
     slug = df0.Slug[df0['Country']==country].to_string(index=False)[1:]
     url = 'https://api.covid19api.com/total/dayone/country/'+slug+'/status/'+graph_type
     r = requests.get(url)
-    st.write("""# Total """+graph_type+""" cases in """+country+""" are: """+str(r.json()[-1].get("Cases")))
-    df = pd.json_normalize(r.json())
-    layout = go.Layout(
-        title = country+'\'s '+graph_type+' cases Data',
-        xaxis = dict(title = 'Date'),
-        yaxis = dict(title = 'Number of cases'),)
-    fig.update_layout(dict1 = layout, overwrite = True)
-    fig.add_trace(go.Scatter(x=df.Date, y=df.Cases, mode='lines', name=country))
-    
-    if country1 != 'Select a Country':
-        slug1 = df0.Slug[df0['Country']==country1].to_string(index=False)[1:]
-        url = 'https://api.covid19api.com/total/dayone/country/'+slug1+'/status/'+graph_type
-        r = requests.get(url)
-        st.write("""# Total """+graph_type+""" cases in """+country1+""" are: """+str(r.json()[-1].get("Cases")))
+    if not r.json():
+        st.write('No data for ' + country)
+    else:
+        st.write("""# Total """+graph_type+""" cases in """+country+""" are: """+str(r.json()[-1].get("Cases")))
         df = pd.json_normalize(r.json())
         layout = go.Layout(
-            title = country+' vs '+country1+' '+graph_type+' cases Data',
+            title = country+'\'s '+graph_type+' cases Data',
             xaxis = dict(title = 'Date'),
             yaxis = dict(title = 'Number of cases'),)
         fig.update_layout(dict1 = layout, overwrite = True)
-        fig.add_trace(go.Scatter(x=df.Date, y=df.Cases, mode='lines', name=country1))
+        fig.add_trace(go.Scatter(x=df.Date, y=df.Cases, mode='lines', name=country))
         
-    st.plotly_chart(fig, use_container_width=True)
-    # url = 'https://api.covid19api.com/live/country/'+country
-    # # url = 'https://api.covid19api.com/all'
-    # r = requests.get(url)
-    # df = json_normalize(r.json())
-    df1 = df[['Country','Date','Cases','Status']]
-    st.dataframe(df.sort_values(by=['Date'],ascending=False))
+        if country1 != 'Select a Country':
+            slug1 = df0.Slug[df0['Country']==country1].to_string(index=False)[1:]
+            url = 'https://api.covid19api.com/total/dayone/country/'+slug1+'/status/'+graph_type
+            r = requests.get(url)
+            st.write("""# Total """+graph_type+""" cases in """+country1+""" are: """+str(r.json()[-1].get("Cases")))
+            df = pd.json_normalize(r.json())
+            layout = go.Layout(
+                title = country+' vs '+country1+' '+graph_type+' cases Data',
+                xaxis = dict(title = 'Date'),
+                yaxis = dict(title = 'Number of cases'),)
+            fig.update_layout(dict1 = layout, overwrite = True)
+            fig.add_trace(go.Scatter(x=df.Date, y=df.Cases, mode='lines', name=country1))
+            
+        st.plotly_chart(fig, use_container_width=True)
+        # url = 'https://api.covid19api.com/live/country/'+country
+        # # url = 'https://api.covid19api.com/all'
+        # r = requests.get(url)
+        # df = json_normalize(r.json())
+        df1 = df[['Country','Date','Cases','Status']]
+        st.dataframe(df.sort_values(by=['Date'],ascending=False))
 
 else:
     url = 'https://api.covid19api.com/world/total'
