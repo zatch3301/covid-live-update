@@ -14,3 +14,5 @@ A live COVID 19 visualiser made with Python streamlit, pandas, plotly, etc. via 
      Line graphs to visualise and compare the COVID data between two countries.
      Live display of the number of cases in various countires.
      Filter based search depending upon various countries   
+
+Hope you like it :))
